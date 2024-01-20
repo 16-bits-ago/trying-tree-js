@@ -1,0 +1,10 @@
+{
+  "name": "trying-tree-js",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "npx vite"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  }
+}
