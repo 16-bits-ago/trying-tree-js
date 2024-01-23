@@ -24,28 +24,55 @@ document.body.appendChild( renderer.domElement );
 // Геометрия + материал дают нам сетку
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 'purple', wireframe: true } ); // wireframe: true - делает объект прозрачным
-const cube = new THREE.Mesh( geometry, material );
+const cube1 = new THREE.Mesh( geometry, material );
+const cube2 = new THREE.Mesh( geometry, material );
+const cube3 = new THREE.Mesh( geometry, material );
+const cube4 = new THREE.Mesh( geometry, material );
+
+const group = new THREE.Group().add(cube1, cube2, cube3, cube4); // - группа объектов
+
+//group.scale.y = 2; - взаимодействие с группой
 
 // Добавление сетки на сцену
-scene.add( cube );
+scene.add( group );
 
 // Отодвигаем камеру от объекта, так как по дефолту камера и сам объект создаются в позиции 0
 camera.position.z = 5;
+
+//cube.rotation.reorder('YXZ'); - позволяет сменить порядок вращения
+
+//camera.lookAt( new THREE.Vector3(1, -1, 0) ); - смещение взгляда камеры в позиции 0
+//camera.lookAt(cube.position); - позволяет зафиксировать камеру на объекте
+
+
 
 function animate() {
 	requestAnimationFrame( animate );
 
     // Виды преобразования обхектов: position, rotation, scale, quaternion
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
+	cube1.rotation.x += 0.01;
+	cube1.rotation.y += 0.01;
+    cube1.position.y = -1;
 
-    cube.position.x = -1;
+    cube2.rotation.x += 0.01;
+	cube2.rotation.y += 0.01;
+    cube2.position.y = 1;
+
+    cube3.rotation.x += 0.01;
+	cube3.rotation.y += 0.01;
+    cube3.position.x = 1;
+
+    cube4.rotation.x += 0.01;
+	cube4.rotation.y += 0.01;
+    cube4.position.x = -1;
+
+    /* cube.position.x = -1;
     cube.position.y = -0.5;
     cube.position.z = -2;
 
     cube.scale.x = 3;
     cube.scale.y = 5;
-    cube.scale.z = 1;
+    cube.scale.z = 1; */
 
     /* Полезные методы для позиции:
         cube.position.length() - расстояние между объектами
