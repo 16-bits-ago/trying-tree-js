@@ -6,6 +6,43 @@
 		<style>
 			body { margin: 0; }
 		</style>
+		<!-- 
+			CAMERAS in TREE.JS
+			1. Kамера это абстрактный класс и мы не должны использовать его напрямую, но можем наследовать от него доступ к общим свойствам и методам
+			2. Виды камер (специфический):
+			    - ArrayCamera - многократный рендеринг сцены с разных камер. Каждая камера показывает определенную часть сцены
+					const cameras = [
+						new THREE.PerspectiveCamera(fov, aspect, near, far),
+						new THREE.PerspectiveCamera(fov, aspect, near, far)
+					]
+
+					const camera = new THREE.ArrayCamera(cameras)
+				- StereoCamera - рендеринг сцены с 2 камер который имитирует глаза (эффект паралакс - глубина)
+				    const camera = new THREE.StereoCamera();
+					const leftCamera = camera.cameraL;
+					const rightCamera = camera.cameraR;
+					leftCamera.position.set(x,y,z);
+					rightCamera.position.set(x,y,z);
+					leftCamera.focalLength = 10;
+					rightCamera.focalLength = 10;
+					RENDERING
+					camera.updat(render, scene);
+					render.setRenderTarget(renderer.getRenderTarget().left)
+					renderer.render(scene, leftCamera);
+					render.setRenderTarget(renderer.getRenderTarget().right)
+					renderer.render(scene, rightCamera);
+					renderer.setRenderTarget(null)
+				- CubeCamera - получение рендлеринга в каждом направлении (для карты окружения или теней)
+					const cubeCamera = new THREE.CubeCamera(near, far, resolution);
+					cubeCamera.position.set(x, y, z);
+					scene.add(cubeCamera);
+					cubeCamera.update(render, scene);
+			3. Виды камер (частоиспользуемые):
+			    - OrthographicCamera - рендеринг сцены без перспектив размеров (например как в Age of empires - все объекты одинаковые не зависимо от расстояния от камеры)
+				    const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far); - видит только то что внутри куба как будто, все что за пределами не видно!!!
+				- PerspectiveCamera - выидит как глаз человека или камера телефона (ближе - больше, дальше меньше)
+					const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+		 -->
 	</head>
 	<body>
 		<!-- <script type="module" src="/script.js"></script> -->
