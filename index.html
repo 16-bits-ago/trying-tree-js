@@ -43,9 +43,24 @@
 				- PerspectiveCamera - выидит как глаз человека или камера телефона (ближе - больше, дальше меньше)
 					const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 		 -->
-	</head>
+	
+		 <!-- 
+			ЭЛЕМЕНТЫ УПРАВЛЕНИЯ ОБЪЕКТАМИ НА СЦЕНЕ:
+			
+			Кроме управления с помощью нативного JS через mousemove, TREE.JS предоставляет встроенные элементы управления
+				1. FlyControls - перемещение камеры как будто на космическом корабле (все 3 оси)
+				2. FirstPersonControls - тоже самое что и FlyControls но с фиксированной осью верх. Как Птица которая не может крутится вокруг своей оси
+				3. PointerLockControls - Под капотом юзает JS API. Скрывает крусок удерживая его в центре, но продолжает отправлять событие mousemove в колбеки (подходит для создания игр в браузере)
+				4. OrbitControls - управление точкой кнопками мыши и клавиатуры
+				5. TransformControls - добавление управления к объекту для его перемещения
+				6. DragControls - перетаскивание объектов DnD
+		  -->
+		
+		
+		</head>
 	<body>
 		<!-- <script type="module" src="/script.js"></script> -->
-		<script type="module" src="/script-practice.js"></script>
+		<!-- <script type="module" src="/script-practice.js"></script> -->
+		<script type="module" src="/script-elements-of-controls.js"></script>
 	</body>
 </html>
